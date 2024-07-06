@@ -898,5 +898,11 @@
     "rarity": "4-Star",
     "weaponType": "Bow",
     "ascensionMaterial": "All Aerosiderite"
+  },
+  {
+    "name": "Silvershower Heartstrings",
+    "rarity": "5-Star",
+    "weaponType": "Bow",
+    "ascensionMaterial": "All Pure Sacred Dewdrop"
   }
 ]

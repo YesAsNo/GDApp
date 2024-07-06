@@ -84,5 +84,6 @@
   {"name":"Yun Jin","element":"Geo","weaponType":"Polearm","talentMaterial":"Diligence","weeklyTalentMaterial":"Ashen Heart"},
   {"name":"Zhongli","element":"Geo","weaponType":"Polearm","talentMaterial":"Gold","weeklyTalentMaterial":"Tusk of Monoceros Caeli"},
   {"name":"Clorinde","element":"Electro","weaponType":"Sword","talentMaterial":"Justice","weeklyTalentMaterial":"Everamber"},
-  {"name":"Sethos","element":"Electro","weaponType":"Bow","talentMaterial":"Praxis","weeklyTalentMaterial":"Daka\u0027s Bell"}
+  {"name":"Sethos","element":"Electro","weaponType":"Bow","talentMaterial":"Praxis","weeklyTalentMaterial":"Daka\u0027s Bell"},
+  {"name":"Sigewinne","element":"Hydro","weaponType":"Bow","talentMaterial":"Equity","weeklyTalentMaterial":"Lightless Eye of the Maelstrom"}
 ]
