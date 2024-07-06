@@ -39,7 +39,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -55,12 +54,14 @@ import java.util.List;
 /**
  * This class creates character cards with fields that allow you to customize the items equipped on the character.
  */
-public class CharacterCardGUI extends JFrame {
+public class CharacterCardGUI extends JPanel {
     /**
      * Save button color.
      */
     public static final int YES_CHANGES_SAVE_BUTTON_COLOR = 0xA3D691;
     private final JButton saveButton = new JButton();
+
+    public final JPanel mainPanel;
 
     /**
      * Constructor of the class
@@ -68,15 +69,8 @@ public class CharacterCardGUI extends JFrame {
      * @param characterListing the character card that contains the required data to construct this GUI.
      */
     public CharacterCardGUI(CharacterListing characterListing) {
-        setTitle(characterListing.getCharacterName() + " Character Overview");
-        setContentPane(generateCharacterPage(characterListing));
-        setDefaultCloseOperation(HIDE_ON_CLOSE);
-        setSize(1000, 600);
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setIconImage(getCharacter(characterListing.getCharacterName()).icon.getImage());
-        setVisible(true);
-
+        mainPanel = generateCharacterPage(characterListing);
+        mainPanel.setVisible(true);
     }
 
     /**

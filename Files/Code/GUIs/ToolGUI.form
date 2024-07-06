@@ -34,7 +34,7 @@
             </constraints>
             <properties>
               <font name="Source Code Pro Black" size="20" style="1"/>
-              <tabPlacement value="1"/>
+              <tabPlacement value="2"/>
             </properties>
             <border type="none">
               <title-color color="-5524801"/>
