@@ -149,7 +149,7 @@ public class ToolGUI extends JFrame {
         setContentPane(mainPanel);
         setTitle("Genshin Domain App v.1.3");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1000, 600);
+        setSize(1050, 600);
         setLocationRelativeTo(null);
         setIconImage(new ImageIcon(Objects.requireNonNull(
                 ToolGUI.class.getResource("/Files/Images/Icons/Program_Icon_Barbara.png"))).getImage());

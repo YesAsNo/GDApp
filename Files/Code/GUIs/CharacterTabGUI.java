@@ -47,12 +47,10 @@ import java.util.TreeMap;
 public final class CharacterTabGUI implements ActionListener {
 
     private final JPanel mainPanel = new JPanel(new GridBagLayout());
-    private final JPanel searchTab = new JPanel(new GridBagLayout());
     private final JPanel searchResultPanel = new JPanel(new GridBagLayout());
     private static final String ALL_ELEMENTS = "All Elements";
     private final JTabbedPane mainTabbedPane = new JTabbedPane(SwingConstants.TOP);
     private final JTextField searchField = new JTextField();
-    private final JScrollPane searchScrollPane = new JScrollPane();
     private final Map<String, ImageIcon> elementIcons = new TreeMap<>();
     private final JComboBox<JLabel> elementFilterBox = new JComboBox<>();
     private final JLabel matchesLabel = new JLabel();
@@ -68,6 +66,7 @@ public final class CharacterTabGUI implements ActionListener {
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         mainPanel.add(mainTabbedPane, gbc);
+        JPanel searchTab = new JPanel(new GridBagLayout());
         mainTabbedPane.addTab("SEARCH", searchTab);
         searchTab.setEnabled(true);
         searchTab.setFocusCycleRoot(false);
@@ -76,6 +75,26 @@ public final class CharacterTabGUI implements ActionListener {
         searchTab.setRequestFocusEnabled(true);
 
         parseElementIcons();
+
+        JPanel searchBarPanel = new JPanel(new GridBagLayout());
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0;
+        gbc.fill = GridBagConstraints.BOTH;
+        searchTab.add(searchBarPanel,gbc);
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 4;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.9;
+        gbc.fill = GridBagConstraints.BOTH;
+        JScrollPane searchScrollPane = new JScrollPane(searchResultPanel);
+        searchTab.add(searchScrollPane,gbc);
 
         elementFilterBox.setBackground(new Color(-2702646));
         elementFilterBox.setEnabled(true);
@@ -97,7 +116,7 @@ public final class CharacterTabGUI implements ActionListener {
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.EAST;
         gbc.insets = new Insets(0, 200, 0, 5);
-        searchTab.add(elementFilterBox, gbc);
+        searchBarPanel.add(elementFilterBox, gbc);
 
         changeFont(matchesLabel, ToolData.AVAILABLE_FONTS.BLACK_FONT, 12);
         matchesLabel.setForeground(new Color(-15072759));
@@ -107,16 +126,7 @@ public final class CharacterTabGUI implements ActionListener {
         gbc.weightx = 1.0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(0, 5, 0, 5);
-        searchTab.add(matchesLabel, gbc);
-
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 4;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
-        searchTab.add(searchResultPanel, gbc);
+        searchBarPanel.add(matchesLabel, gbc);
 
         JButton searchConfirmButton = new JButton();
         searchConfirmButton.setMinimumSize(new Dimension(50, 30));
@@ -127,7 +137,7 @@ public final class CharacterTabGUI implements ActionListener {
         gbc.gridx = 2;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
-        searchTab.add(searchConfirmButton, gbc);
+        searchBarPanel.add(searchConfirmButton, gbc);
 
         searchField.addMouseListener(new SearchBarListener());
         searchField.setEnabled(true);
@@ -142,7 +152,9 @@ public final class CharacterTabGUI implements ActionListener {
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(0, 5, 0, 5);
-        searchTab.add(searchField, gbc);
+        searchBarPanel.add(searchField, gbc);
+
+        searchTab.updateUI();
     }
 
     /**
@@ -218,8 +230,7 @@ public final class CharacterTabGUI implements ActionListener {
         int matchedCount = 0;
         userFieldInput = searchField.getText().toLowerCase();
         //TODO: must remove all other tabs but not the first.
-        //mainTabbedPane.removeAll();
-        searchScrollPane.updateUI();
+        searchResultPanel.removeAll();
         JLabel label = (JLabel) elementFilterBox.getSelectedItem();
         assert label != null;
         String element = label.getText();
@@ -246,17 +257,9 @@ public final class CharacterTabGUI implements ActionListener {
         if (matchedCount == 0) {
             //TODO: Make it a separate tab.
             generateNoMatchesLabel();
-        } else {
-            searchScrollPane.setViewportView(searchResultPanel);
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridx = 0;
-            gbc.gridy = 1;
-            gbc.gridwidth = 4;
-            gbc.weightx = 1.0;
-            gbc.weighty = 1.0;
-            gbc.fill = GridBagConstraints.BOTH;
+        }
+        else{
 
-            searchResultPanel.add(searchScrollPane, gbc);
         }
 
     }
