@@ -223,7 +223,18 @@ public final class CharacterTabGUI implements ActionListener {
                 JPanel panelTab = new JPanel(new GridBagLayout());
                 panelTab.setOpaque(false);
                 JLabel labelTitle = new JLabel(characterName);
-                JButton closeButton = new JButton("x");
+
+                // ADD ICON AND RESIZE
+                String iconPath = "K:/project/Paul/Genshin/Files/Images/Placeholders/x_icon.png";
+                ImageIcon closeIcon = new ImageIcon(iconPath);
+                Image resizedImage = closeIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+                ImageIcon resizedIcon = new ImageIcon(resizedImage);
+
+                // TAB CLOSE BUTTON
+                JButton closeButton = new JButton(resizedIcon);
+
+                closeButton.setMinimumSize(new Dimension(20, 20));
+                closeButton.setPreferredSize(new Dimension(20, 20));
 
                 GridBagConstraints gbc = new GridBagConstraints();
                 gbc.gridx = 0;
@@ -234,6 +245,10 @@ public final class CharacterTabGUI implements ActionListener {
 
                 gbc.gridx++;
                 gbc.weightx = 0;
+
+                // Add space around the button (outside the button itself)
+                gbc.insets = new Insets(2, 5, 2, 5); // Top, Left, Bottom, Right (5 pixels of space on the left and right)
+
                 panelTab.add(closeButton,gbc);
 
                 mainTabbedPane.setTabComponentAt(newTabIndex,panelTab);
