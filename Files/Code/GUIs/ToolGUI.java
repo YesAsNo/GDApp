@@ -147,7 +147,7 @@ public class ToolGUI extends JFrame {
         addTab("Weapons", _weaponsTabGUI.getMainPanel());
         addTab("Domains", _domainTabGUI.getMainPanel());
         setContentPane(mainPanel);
-        setTitle("Genshin Domain App v.1.3");
+        setTitle("Genshin Domain App v.1.4");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1000, 600);
         setLocationRelativeTo(null);
