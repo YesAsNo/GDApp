@@ -904,5 +904,11 @@
     "rarity": "5-Star",
     "weaponType": "Bow",
     "ascensionMaterial": "All Pure Sacred Dewdrop"
+  },
+  {
+    "name": "Lumidouce Elegy",
+    "rarity": "5-Star",
+    "weaponType": "Polearm",
+    "ascensionMaterial": "All Goblet of the Pristine Sea"
   }
 ]

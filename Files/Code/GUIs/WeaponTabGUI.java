@@ -167,6 +167,11 @@ public class WeaponTabGUI implements ItemListener, ActionListener {
 
     private void parseSearch(SEARCH_FLAG flag) {
         String userFieldInput = devWeaponsTabSearchbar.getText().toLowerCase();
+
+        if (userFieldInput.equals("search by name!")) {
+            userFieldInput = "";
+        }
+
         devWeaponTabScrollPanePanel.removeAll();
         devWeaponTabScrollPane.updateUI();
         parseWeaponsMap();

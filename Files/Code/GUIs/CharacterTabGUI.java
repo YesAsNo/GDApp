@@ -249,9 +249,8 @@ public final class CharacterTabGUI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        String userFieldInput;
+        String userFieldInput = searchField.getText().toLowerCase();
         int matchedCount = 0;
-        userFieldInput = searchField.getText().toLowerCase();
         searchResultPanel.removeAll();
         JLabel label = (JLabel) elementFilterBox.getSelectedItem();
         assert label != null;
@@ -265,6 +264,10 @@ public final class CharacterTabGUI implements ActionListener {
                     eligibleCharacters.add(character);
                 }
             }
+        }
+
+        if (userFieldInput.equals("choose your fighter!")) {
+            userFieldInput = "";
         }
 
         for (Character character : eligibleCharacters) {
