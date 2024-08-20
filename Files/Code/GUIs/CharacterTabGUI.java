@@ -27,12 +27,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -213,10 +211,14 @@ public final class CharacterTabGUI implements ActionListener {
         characterButton.setBorderPainted(false);
         characterButton.setContentAreaFilled(false);
         characterButton.addActionListener(e -> {
-            if (isWindowAlreadyOpen(characterName)) {
-                Objects.requireNonNull(getOpenWindow(characterName)).setVisible(true);
-            } else {
-
+            int tabIndex = mainTabbedPane.indexOfTab(characterName);
+            if (tabIndex != -1)
+            {
+                mainTabbedPane.setSelectedIndex(tabIndex);
+            }
+            else
+            {
+                mainTabbedPane.addTab(characterName,new CharacterCardGUI(characterListing).mainPanel);
             }
         });
 
@@ -229,7 +231,6 @@ public final class CharacterTabGUI implements ActionListener {
         String userFieldInput;
         int matchedCount = 0;
         userFieldInput = searchField.getText().toLowerCase();
-        //TODO: must remove all other tabs but not the first.
         searchResultPanel.removeAll();
         JLabel label = (JLabel) elementFilterBox.getSelectedItem();
         assert label != null;
@@ -255,11 +256,7 @@ public final class CharacterTabGUI implements ActionListener {
         }
         matchesLabel.setText("Matches: " + matchedCount);
         if (matchedCount == 0) {
-            //TODO: Make it a separate tab.
             generateNoMatchesLabel();
-        }
-        else{
-
         }
 
     }
@@ -269,43 +266,10 @@ public final class CharacterTabGUI implements ActionListener {
         unknownCharacterLabel.setText(NO_CHARACTERS_MATCH_MESSAGE);
         unknownCharacterLabel.setVerticalTextPosition(SwingConstants.BOTTOM);
         unknownCharacterLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-        mainTabbedPane.add(unknownCharacterLabel);
-        mainTabbedPane.updateUI();
+        searchResultPanel.add(unknownCharacterLabel);
+        searchResultPanel.updateUI();
     }
 
-    /**
-     * Verifies if a window for the specified character has already been opened.
-     *
-     * @param charName the specified character
-     * @return true if the window is open, otherwise false.
-     */
-
-    public boolean isWindowAlreadyOpen(String charName) {
-        Frame[] createdWindows = Frame.getFrames();
-        for (Frame window : createdWindows) {
-            if (window != null && window.getTitle().contains(charName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Gets the open window for the specified character.
-     *
-     * @param charName the name of the character
-     * @return window with the loaded character card for the specified character
-     */
-    public Window getOpenWindow(String charName) {
-        assert isWindowAlreadyOpen(charName);
-        Frame[] createdWindows = Frame.getFrames();
-        for (Frame frame : createdWindows) {
-            if (frame != null && frame.getTitle().contains(charName)) {
-                return frame;
-            }
-        }
-        return null;
-    }
 
     /**
      * Adds a character button to the selected character panel (after triggering actionPerformed)
