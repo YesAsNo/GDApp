@@ -219,6 +219,27 @@ public final class CharacterTabGUI implements ActionListener {
             else
             {
                 mainTabbedPane.addTab(characterName,new CharacterCardGUI(characterListing).mainPanel);
+                int newTabIndex = mainTabbedPane.indexOfTab(characterName);
+                JPanel panelTab = new JPanel(new GridBagLayout());
+                panelTab.setOpaque(false);
+                JLabel labelTitle = new JLabel(characterName);
+                JButton closeButton = new JButton("x");
+
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.weightx = 1;
+
+                panelTab.add(labelTitle,gbc);
+
+                gbc.gridx++;
+                gbc.weightx = 0;
+                panelTab.add(closeButton,gbc);
+
+                mainTabbedPane.setTabComponentAt(newTabIndex,panelTab);
+
+                closeButton.addActionListener(new TabCloseButtonActionHandler(characterName,mainTabbedPane));
+
             }
         });
 
@@ -286,4 +307,22 @@ public final class CharacterTabGUI implements ActionListener {
 
     }
 
+}
+class TabCloseButtonActionHandler implements ActionListener {
+
+    private final String characterName;
+    private final JTabbedPane tabbedPane;
+
+    public TabCloseButtonActionHandler(String characterName,JTabbedPane tabbedPane){
+        this.characterName = characterName;
+        this.tabbedPane = tabbedPane;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        int index = tabbedPane.indexOfTab(characterName);
+        if (index >= 1){
+            tabbedPane.removeTabAt(index);
+        }
+    }
 }
