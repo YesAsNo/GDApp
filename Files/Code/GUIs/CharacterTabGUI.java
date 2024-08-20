@@ -225,7 +225,9 @@ public final class CharacterTabGUI implements ActionListener {
                 JLabel labelTitle = new JLabel(characterName);
 
                 // ADD ICON AND RESIZE
-                String iconPath = "K:/project/Paul/Genshin/Files/Images/Placeholders/x_icon.png";
+                String partialPath = "Files/Images/Placeholders/x_icon.png";
+                String iconPath = System.getProperty("user.dir") + "/" + partialPath;
+                
                 ImageIcon closeIcon = new ImageIcon(iconPath);
                 Image resizedImage = closeIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
                 ImageIcon resizedIcon = new ImageIcon(resizedImage);
