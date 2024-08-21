@@ -164,17 +164,6 @@ public final class CharacterTabGUI implements ActionListener {
         return mainPanel;
     }
 
-    /**
-     * Generates a character button for the character specified by name and the index of the match.
-     *
-     * @param characterName the name of the character
-     * @param index which character by count it is
-     */
-    private void generateCharacterButton(String characterName, int index) {
-        JButton characterButton = getjButton(characterName);
-        addCharacterButtonToSelectedCharacterPanel(characterButton, index);
-
-    }
 
     private void parseElementIcons() {
         final String iconFolderAddress = "/Files/Images/Icons";
@@ -290,10 +279,15 @@ public final class CharacterTabGUI implements ActionListener {
         for (Character character : eligibleCharacters) {
             if (character.name.toLowerCase().contains(userFieldInput)) {
                 {
-                    generateCharacterButton(character.name, matchedCount);
+                    JButton characterButton = getjButton(character.name);
+                    GridBagConstraints gbc = new GridBagConstraints();
+                    gbc.gridx = matchedCount % 6;
+                    gbc.gridy = matchedCount / 6;
+                    searchResultPanel.add(characterButton, gbc);
                 }
                 matchedCount++;
             }
+            searchResultPanel.updateUI();
         }
         matchesLabel.setText("Matches: " + matchedCount);
         if (matchedCount == 0) {
@@ -311,36 +305,20 @@ public final class CharacterTabGUI implements ActionListener {
         searchResultPanel.updateUI();
     }
 
-
-    /**
-     * Adds a character button to the selected character panel (after triggering actionPerformed)
-     *
-     * @param charButton the button to add
-     * @param index the index of the match
-     */
-    private void addCharacterButtonToSelectedCharacterPanel(JButton charButton, int index) {
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = index % 6;
-        gbc.gridy = index / 6;
-        searchResultPanel.add(charButton, gbc);
-        searchResultPanel.updateUI();
-
-    }
-
 }
 class TabCloseButtonActionHandler implements ActionListener {
 
-    private final String characterName;
+    private final String tabItemName;
     private final JTabbedPane tabbedPane;
 
-    public TabCloseButtonActionHandler(String characterName,JTabbedPane tabbedPane){
-        this.characterName = characterName;
+    public TabCloseButtonActionHandler(String tabItemName, JTabbedPane tabbedPane){
+        this.tabItemName = tabItemName;
         this.tabbedPane = tabbedPane;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int index = tabbedPane.indexOfTab(characterName);
+        int index = tabbedPane.indexOfTab(tabItemName);
         if (index >= 1){
             tabbedPane.removeTabAt(index);
         }

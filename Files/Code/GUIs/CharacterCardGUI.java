@@ -54,7 +54,7 @@ import java.util.List;
 /**
  * This class creates character cards with fields that allow you to customize the items equipped on the character.
  */
-public class CharacterCardGUI extends JPanel {
+public class CharacterCardGUI{
     /**
      * Save button color.
      */

@@ -37,7 +37,7 @@ import java.util.Objects;
 /**
  * This class constructs a domain card GUI (shown after clicking on a domain card).
  */
-public class DomainCardGUI extends JFrame {
+public class DomainCardGUI{
     private final DomainTabGUI.DOMAIN_THEME domainTheme;
     private final Domain domain;
     private final JPanel mainPanel = new JPanel(new GridBagLayout());
@@ -51,15 +51,7 @@ public class DomainCardGUI extends JFrame {
     public DomainCardGUI(Domain domain, DomainTabGUI.DOMAIN_THEME domainTheme) {
         this.domainTheme = domainTheme;
         this.domain = domain;
-        setTitle(domain.name + " Overview");
-        setContentPane(generateDomainCard());
-        setDefaultCloseOperation(HIDE_ON_CLOSE);
-        setSize(1000, 600);
-        setLocationRelativeTo(null);
-        setIconImage(new ImageIcon(Objects.requireNonNull(
-                DomainCardGUI.class.getResource("/Files/Images/Icons/Emblem_Domains_pink.png"))).getImage());
-        setVisible(true);
-        setResizable(false);
+        mainPanel.setVisible(true);
     }
 
     /**
@@ -280,5 +272,8 @@ public class DomainCardGUI extends JFrame {
         gbc.insets = new Insets(0, 5, 0, 5);
         domainItemLabel.setIcon(itemIcon);
         panel.add(domainItemLabel, gbc);
+    }
+    public JPanel getMainPanel(){
+        return mainPanel;
     }
 }

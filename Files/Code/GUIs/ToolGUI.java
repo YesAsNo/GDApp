@@ -149,7 +149,7 @@ public class ToolGUI extends JFrame {
         setContentPane(mainPanel);
         setTitle("Genshin Domain App v.1.4");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1050, 600);
+        setSize(1200, 700);
         setLocationRelativeTo(null);
         setIconImage(new ImageIcon(Objects.requireNonNull(
                 ToolGUI.class.getResource("/Files/Images/Icons/Program_Icon_Barbara.png"))).getImage());
@@ -179,10 +179,10 @@ public class ToolGUI extends JFrame {
     /**
      * Updates the farmed map.
      *
-     * @param dataField        what field has been updated
+     * @param dataField what field has been updated
      * @param characterListing what character card has been updated
-     * @param status           whether the character has started farming the item or not
-     * @param item             the item that has been either removed or assigned to the character card.
+     * @param status whether the character has started farming the item or not
+     * @param item the item that has been either removed or assigned to the character card.
      */
     public static void updateFarmedItemMap(ToolData.CHARACTER_CARD_DATA_FIELD dataField,
                                            CharacterListing characterListing, boolean status, Item item) {
@@ -404,16 +404,28 @@ public class ToolGUI extends JFrame {
         mainPanel.setBackground(new Color(-2702645));
         mainPanel.setEnabled(true);
         final Spacer spacer1 = new Spacer();
-        mainPanel.add(spacer1, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        mainPanel.add(spacer1,
+                new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1,
+                        GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         mainInformationPanel = new JPanel();
         mainInformationPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         mainInformationPanel.setBackground(new Color(-468502));
-        mainPanel.add(mainInformationPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        mainPanel.add(mainInformationPanel,
+                new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null,
+                        0, false));
         mainTabbedPane = new JTabbedPane();
         Font mainTabbedPaneFont = this.$$$getFont$$$("Source Code Pro Black", Font.BOLD, 20, mainTabbedPane.getFont());
-        if (mainTabbedPaneFont != null) mainTabbedPane.setFont(mainTabbedPaneFont);
+        if (mainTabbedPaneFont != null) {
+            mainTabbedPane.setFont(mainTabbedPaneFont);
+        }
         mainTabbedPane.setTabPlacement(2);
-        mainInformationPanel.add(mainTabbedPane, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(200, 200), null, 0, false));
+        mainInformationPanel.add(mainTabbedPane,
+                new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null,
+                        new Dimension(200, 200), null, 0, false));
         welcomeTab = new JPanel();
         welcomeTab.setLayout(new GridBagLayout());
         mainTabbedPane.addTab("Welcome!", welcomeTab);
@@ -438,45 +450,71 @@ public class ToolGUI extends JFrame {
         Welcome_Barbara = new JLabel();
         Welcome_Barbara.setIcon(new ImageIcon(getClass().getResource("/Files/Images/Aesthetics/Barbara_Hello.gif")));
         Welcome_Barbara.setText("");
-        devBasicInfoLeftPanel.add(Welcome_Barbara, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        devBasicInfoLeftPanel.add(Welcome_Barbara,
+                new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0,
+                        false));
         devUpdatesTextPane = new JTextPane();
         devUpdatesTextPane.setBackground(new Color(-465419));
         devUpdatesTextPane.setEditable(false);
         devUpdatesTextPane.setEnabled(true);
         devUpdatesTextPane.setFocusable(false);
         Font devUpdatesTextPaneFont = this.$$$getFont$$$(null, -1, -1, devUpdatesTextPane.getFont());
-        if (devUpdatesTextPaneFont != null) devUpdatesTextPane.setFont(devUpdatesTextPaneFont);
+        if (devUpdatesTextPaneFont != null) {
+            devUpdatesTextPane.setFont(devUpdatesTextPaneFont);
+        }
         devUpdatesTextPane.setForeground(new Color(-11071434));
         devUpdatesTextPane.setMargin(new Insets(30, 20, 10, 10));
         devUpdatesTextPane.setSelectionColor(new Color(-9555638));
         devUpdatesTextPane.setText("For future updates contact one of us. Make sure to keep your save file!");
-        devBasicInfoLeftPanel.add(devUpdatesTextPane, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        devBasicInfoLeftPanel.add(devUpdatesTextPane,
+                new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL,
+                        GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null,
+                        new Dimension(150, 50), null, 0, false));
         devCreatorsLabel = new JLabel();
         devCreatorsLabel.setBackground(new Color(-465419));
         Font devCreatorsLabelFont = this.$$$getFont$$$(null, -1, -1, devCreatorsLabel.getFont());
-        if (devCreatorsLabelFont != null) devCreatorsLabel.setFont(devCreatorsLabelFont);
+        if (devCreatorsLabelFont != null) {
+            devCreatorsLabel.setFont(devCreatorsLabelFont);
+        }
         devCreatorsLabel.setForeground(new Color(-11071434));
         devCreatorsLabel.setText(". * Creators * .");
-        devBasicInfoLeftPanel.add(devCreatorsLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        devBasicInfoLeftPanel.add(devCreatorsLabel,
+                new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0,
+                        false));
         devLinakoLabel = new JLabel();
         devLinakoLabel.setBackground(new Color(-465419));
         Font devLinakoLabelFont = this.$$$getFont$$$(null, -1, -1, devLinakoLabel.getFont());
-        if (devLinakoLabelFont != null) devLinakoLabel.setFont(devLinakoLabelFont);
+        if (devLinakoLabelFont != null) {
+            devLinakoLabel.setFont(devLinakoLabelFont);
+        }
         devLinakoLabel.setForeground(new Color(-11071434));
         devLinakoLabel.setText("Linako (yes.as.no)");
-        devBasicInfoLeftPanel.add(devLinakoLabel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        devBasicInfoLeftPanel.add(devLinakoLabel,
+                new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0,
+                        false));
         devPrecisi0nLabel = new JLabel();
         devPrecisi0nLabel.setBackground(new Color(-465419));
         Font devPrecisi0nLabelFont = this.$$$getFont$$$(null, -1, -1, devPrecisi0nLabel.getFont());
-        if (devPrecisi0nLabelFont != null) devPrecisi0nLabel.setFont(devPrecisi0nLabelFont);
+        if (devPrecisi0nLabelFont != null) {
+            devPrecisi0nLabel.setFont(devPrecisi0nLabelFont);
+        }
         devPrecisi0nLabel.setForeground(new Color(-11071434));
         devPrecisi0nLabel.setText("precisi0n");
-        devBasicInfoLeftPanel.add(devPrecisi0nLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        devBasicInfoLeftPanel.add(devPrecisi0nLabel,
+                new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0,
+                        false));
         devBasicInfoRightPanel = new JPanel();
         devBasicInfoRightPanel.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
         devBasicInfoRightPanel.setBackground(new Color(-465419));
-        Font devBasicInfoRightPanelFont = this.$$$getFont$$$("Source Code Pro Black", Font.BOLD, 22, devBasicInfoRightPanel.getFont());
-        if (devBasicInfoRightPanelFont != null) devBasicInfoRightPanel.setFont(devBasicInfoRightPanelFont);
+        Font devBasicInfoRightPanelFont =
+                this.$$$getFont$$$("Source Code Pro Black", Font.BOLD, 22, devBasicInfoRightPanel.getFont());
+        if (devBasicInfoRightPanelFont != null) {
+            devBasicInfoRightPanel.setFont(devBasicInfoRightPanelFont);
+        }
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -487,31 +525,45 @@ public class ToolGUI extends JFrame {
         devWelcomeLabel = new JLabel();
         devWelcomeLabel.setBackground(new Color(-465419));
         Font devWelcomeLabelFont = this.$$$getFont$$$(null, -1, -1, devWelcomeLabel.getFont());
-        if (devWelcomeLabelFont != null) devWelcomeLabel.setFont(devWelcomeLabelFont);
+        if (devWelcomeLabelFont != null) {
+            devWelcomeLabel.setFont(devWelcomeLabelFont);
+        }
         devWelcomeLabel.setForeground(new Color(-11071434));
         devWelcomeLabel.setText("° . * Welcome to GDApp! * . °");
-        devBasicInfoRightPanel.add(devWelcomeLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        devBasicInfoRightPanel.add(devWelcomeLabel,
+                new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+                        GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0,
+                        false));
         devBasicInfoSpacer = new JPanel();
         devBasicInfoSpacer.setLayout(new GridLayoutManager(1, 1, new Insets(20, 0, 0, 0), -1, -1));
         devBasicInfoSpacer.setBackground(new Color(-465419));
-        devBasicInfoRightPanel.add(devBasicInfoSpacer, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        devBasicInfoRightPanel.add(devBasicInfoSpacer,
+                new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+                        GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null,
+                        0, false));
         devInfoTextPane = new JTextPane();
         devInfoTextPane.setBackground(new Color(-465419));
         devInfoTextPane.setEditable(false);
         devInfoTextPane.setFocusable(false);
         Font devInfoTextPaneFont = this.$$$getFont$$$(null, -1, -1, devInfoTextPane.getFont());
-        if (devInfoTextPaneFont != null) devInfoTextPane.setFont(devInfoTextPaneFont);
+        if (devInfoTextPaneFont != null) {
+            devInfoTextPane.setFont(devInfoTextPaneFont);
+        }
         devInfoTextPane.setForeground(new Color(-11071434));
         devInfoTextPane.setMargin(new Insets(30, 20, 10, 10));
         devInfoTextPane.setText("");
-        devBasicInfoRightPanel.add(devInfoTextPane, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        devBasicInfoRightPanel.add(devInfoTextPane,
+                new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH,
+                        GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null,
+                        new Dimension(150, 50), null, 0, false));
     }
 
-    /**
-     * @noinspection ALL
-     */
+    /** @noinspection ALL */
     private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
-        if (currentFont == null) return null;
+        if (currentFont == null) {
+            return null;
+        }
         String resultName;
         if (fontName == null) {
             resultName = currentFont.getName();
@@ -523,15 +575,15 @@ public class ToolGUI extends JFrame {
                 resultName = currentFont.getName();
             }
         }
-        Font font = new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
+        Font font = new Font(resultName, style >= 0 ? style : currentFont.getStyle(),
+                size >= 0 ? size : currentFont.getSize());
         boolean isMac = System.getProperty("os.name", "").toLowerCase(Locale.ENGLISH).startsWith("mac");
-        Font fontWithFallback = isMac ? new Font(font.getFamily(), font.getStyle(), font.getSize()) : new StyleContext().getFont(font.getFamily(), font.getStyle(), font.getSize());
+        Font fontWithFallback = isMac ? new Font(font.getFamily(), font.getStyle(), font.getSize()) :
+                new StyleContext().getFont(font.getFamily(), font.getStyle(), font.getSize());
         return fontWithFallback instanceof FontUIResource ? fontWithFallback : new FontUIResource(fontWithFallback);
     }
 
-    /**
-     * @noinspection ALL
-     */
+    /** @noinspection ALL */
     public JComponent $$$getRootComponent$$$() {
         return mainPanel;
     }

@@ -41,16 +41,21 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GrayFilter;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.MouseInputAdapter;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -94,6 +99,8 @@ public class DomainTabGUI implements ActionListener {
         bg_listedFilter.add(showListedButton);
         showAllButton.setSelected(true);
     }
+    private static final JTabbedPane mainTabbedPane = new JTabbedPane(SwingConstants.TOP);
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -243,17 +250,39 @@ public class DomainTabGUI implements ActionListener {
      * Constructor of the class.
      */
     public DomainTabGUI() {
+
+        JPanel filterPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        domainTab.add(mainTabbedPane, gbc);
+        JPanel searchTab = new JPanel(new GridBagLayout());
+        mainTabbedPane.addTab("SEARCH", searchTab);
+        searchTab.setEnabled(true);
+        changeFont(searchTab, ToolData.AVAILABLE_FONTS.REGULAR_FONT, 15.0F);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0;
+        gbc.fill = GridBagConstraints.BOTH;
+        searchTab.add(filterPanel,gbc);
+
         // SHOW UNLISTED (ALL) BUTTON
         showAllButton.setBackground(new Color(-2702645));
         showAllButton.setForeground(new Color(-13236722));
         showAllButton.setText("Show all ");
         changeFont(showAllButton, ToolData.AVAILABLE_FONTS.BLACK_FONT, 12);
-        GridBagConstraints gbc = new GridBagConstraints();
+        gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
-        gbc.insets = new Insets(0, 130, 0, 0);
-        domainTab.add(showAllButton, gbc);
+        gbc.insets = new Insets(0, 50, 0, 0);
+        filterPanel.add(showAllButton, gbc);
 
         // SHOW LISTED BUTTON
         showListedButton.setBackground(new Color(-2702645));
@@ -265,7 +294,7 @@ public class DomainTabGUI implements ActionListener {
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(0, 5, 0, 5);
-        domainTab.add(showListedButton, gbc);
+        filterPanel.add(showListedButton, gbc);
 
         // FILTER COMBO BOX
         filterBox.setBackground(new Color(-2702645));
@@ -286,8 +315,8 @@ public class DomainTabGUI implements ActionListener {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(0, 5, 0, 5);
         changeFont(filterBox, ToolData.AVAILABLE_FONTS.BLACK_FONT, 12);
-        domainTab.add(filterBox, gbc);
-        domainTab.setBackground(new Color(-1));
+        filterPanel.add(filterBox, gbc);
+        filterPanel.setBackground(new Color(-1));
 
         // DAY FILTER BUTTONS
         NavigableSet<DAY_FILTER> dayFilters = DAY_FILTER.ALL_OPTIONS_BY_ENUM.navigableKeySet();
@@ -314,28 +343,20 @@ public class DomainTabGUI implements ActionListener {
             gbc.insets = new Insets(0, 0, 0, 5);
             gbc.anchor = GridBagConstraints.WEST;
             c++;
-            domainTab.add(button, gbc);
+            filterPanel.add(button, gbc);
         }
 
         // DOMAINS TAB PANEL
-        JPanel devDomainsTabPanel = new JPanel();
-        devDomainsTabPanel.setLayout(new GridBagLayout());
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 7;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
-        domainTab.add(devDomainsTabPanel, gbc);
-        JScrollPane devDomainsScrollPane = new JScrollPane();
+
+        JScrollPane domainsScrollPane = new JScrollPane(domainsPanelOverview);
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 4;
         gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
+        gbc.weighty = 0.9;
         gbc.fill = GridBagConstraints.BOTH;
-        devDomainsTabPanel.add(devDomainsScrollPane, gbc);
-        devDomainsScrollPane.setViewportView(domainsPanelOverview);
+        searchTab.add(domainsScrollPane, gbc);
 
         wedSatButton.addActionListener(this);
         monThuButton.addActionListener(this);
@@ -358,7 +379,7 @@ public class DomainTabGUI implements ActionListener {
     private void parseFilter(DOMAIN_FILTER_OPTIONS filter, String dayFilter, boolean status) {
         Set<Domain> filteredDomains = new TreeSet<>(ToolData.comparator);
         domainsPanelOverview.removeAll();
-        domainsPanelOverview.updateUI();
+
         int i = 0;
         assert filter != null;
         if (filter == NO_FILTER) {
@@ -380,8 +401,10 @@ public class DomainTabGUI implements ActionListener {
                 gbc.fill = GridBagConstraints.BOTH;
                 gbc.insets = new Insets(5, 100, 5, 100);
                 domainsPanelOverview.add(generateDomainCard(domain, dayFilter), gbc);
+
             }
         }
+        domainsPanelOverview.updateUI();
     }
 
     /**
@@ -500,7 +523,55 @@ public class DomainTabGUI implements ActionListener {
         domainCard.addMouseListener(new MouseInputAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                new DomainCardGUI(domain, dt);
+                //TODO: fix
+                //new DomainCardGUI(domain, dt);
+                int tabIndex = mainTabbedPane.indexOfTab(domain.name);
+                if (tabIndex != -1)
+                {
+                    mainTabbedPane.setSelectedIndex(tabIndex);
+                }
+                else
+                {
+                    mainTabbedPane.addTab(domain.name,new DomainCardGUI(domain,dt).getMainPanel());
+                    int newTabIndex = mainTabbedPane.indexOfTab(domain.name);
+                    JPanel panelTab = new JPanel(new GridBagLayout());
+                    panelTab.setOpaque(false);
+                    JLabel labelTitle = new JLabel(domain.name);
+
+                    // ADD ICON AND RESIZE
+                    String partialPath = "Files/Images/Placeholders/x_icon.png";
+                    String iconPath = System.getProperty("user.dir") + "/" + partialPath;
+
+                    ImageIcon closeIcon = new ImageIcon(iconPath);
+                    Image resizedImage = closeIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+                    ImageIcon resizedIcon = new ImageIcon(resizedImage);
+
+                    // TAB CLOSE BUTTON
+                    JButton closeButton = new JButton(resizedIcon);
+
+                    closeButton.setMinimumSize(new Dimension(20, 20));
+                    closeButton.setPreferredSize(new Dimension(20, 20));
+
+                    GridBagConstraints gbc = new GridBagConstraints();
+                    gbc.gridx = 0;
+                    gbc.gridy = 0;
+                    gbc.weightx = 1;
+
+                    panelTab.add(labelTitle,gbc);
+
+                    gbc.gridx++;
+                    gbc.weightx = 0;
+
+                    // Add space around the button (outside the button itself)
+                    gbc.insets = new Insets(2, 5, 2, 5); // Top, Left, Bottom, Right (5 pixels of space on the left and right)
+
+                    panelTab.add(closeButton,gbc);
+
+                    mainTabbedPane.setTabComponentAt(newTabIndex,panelTab);
+
+                    closeButton.addActionListener(new TabCloseButtonActionHandler(domain.name,mainTabbedPane));
+
+                }
             }
         });
         return domainCard;
